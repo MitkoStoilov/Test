@@ -1,4 +1,3 @@
-#!/Documents/ruby ruby
 class MegaGreeter
 	attr_accessor :names
 
@@ -47,5 +46,4 @@ if __FILE__ == $0
 	mg.names = nil
 	mg.say_hi
 	mg.say_bye
-	end
-
+end
