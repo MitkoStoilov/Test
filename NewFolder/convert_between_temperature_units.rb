@@ -1,7 +1,4 @@
 
-#hello
-
-
 
 def convert_between_temperature_units(x, a, b)
 	if a == 'C' && b == 'K'
@@ -31,5 +28,4 @@ end
 
 
 puts convert_between_temperature_units(1, 'C', 'C')
-
 
