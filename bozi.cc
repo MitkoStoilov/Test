@@ -167,6 +167,17 @@ class ListOfArrays {
     }
 
     ~ListOfArrays(){
+    	while(head_->next_!=head_){
+	    	ArrayNode* elm = head_->next_;
+	    	head_->next_ = elm->next_;
+	    	elm->next_->prev_ = head_;
+	    	elm->data_ = 0;
+	    	delete [] elm->data_;
+	    	delete elm;
+	    	size_--;
+	    }
+	    delete head_;
+
        // cout << "hi" << endl;
     }
 
@@ -183,7 +194,28 @@ class ListOfArrays {
     		
     }
 
-    ListOfArrays& operator=(const ListOfArrays& other);
+    ListOfArrays& operator=(const ListOfArrays& other){
+    	if (this != &other) {
+            //to_empty(); //this->to_empty();
+
+    		while(head_->next_!=head_){
+	    		ArrayNode* elm = head_->next_;
+	    		head_->next_ = elm->next_;
+	    		elm->next_->prev_ = head_;
+	    		elm->data_ = 0;
+	    		delete [] elm->data_;
+	    		delete elm;
+	    		size_--;
+	    	}	
+
+            ArrayNode* node = other.head_ -> next_;
+            while (node != other.head_) {
+                push(node->data_, 1-node->size_, node->size_);
+                node = node -> next_;
+            }
+        }
+        return *this;
+    }
 
     int size(){
         return size_;
@@ -333,7 +365,7 @@ class ListOfArrays {
 
 int main(){
 
-    ListOfArrays l;
+   	ListOfArrays l;
 
     int ARR[17] = {4, 7, 3, 2, 1, 5, 6, 9, 4, 4, 5, 6, 9, 10, 45, 10, 13};
     //cout << l.size() << endl;
@@ -356,10 +388,12 @@ int main(){
         cout << endl;
         cout<< "it.size()= "<< it.size() << endl;
     }*/
-    ListOfArrays d = l;
-    d.show();
-    d.ordered(false);
-    d.show();
+    const ListOfArrays d = l;
+    ListOfArrays c;
+    c = d; 
+    c.ordered(false);
+    c.show();
+    l.show();
     ListOfArrays::Iterator it = l.begin();
     //it++;
     //it++;
